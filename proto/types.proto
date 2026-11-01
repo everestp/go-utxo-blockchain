@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package blocker;
+
+option go_package = "github.com/everestp/blocker;blocker";
+
+message Block {
+  Header header = 1;
+  repeated Transaction transactions = 2;
+}
+
+message Header {
+  int32 version = 1;
+  int64 height = 2;
+  bytes prev_hash = 3;
+  bytes root_hash = 4; // Merkle root of transactions
+  int64 timestamp = 5;
+}
+
+message Transaction {
+  bytes hash = 1;
+  bytes data = 2;
+}
