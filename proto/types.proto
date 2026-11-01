@@ -4,6 +4,17 @@ package blocker;
 
 option go_package = "github.com/everestp/blocker;proto";
 
+service Node {
+	rpc Handshake(Version) returns (Version);
+    rpc HandleTransaction(Transaction) returns (Ack);
+}
+message Version{
+	string version = 1;
+	int32  height = 2;
+}
+
+message Ack {}
+
 message Block {
   Header header = 1;
   repeated Transaction transactions = 2;
@@ -18,21 +29,21 @@ message Header {
 }
 
 message TxInput {
-	//this  previous hash of the transaction containign the output we want to sepnd
-	bytes prevTxHash = 1;
-	//This index of the output of the previous transacton we want to spen
-	uint32 prevOutIndex = 2;
-	bytes publicKey =3;
-	bytes signature = 4;
+    // Previous hash of the transaction containing the output we want to spend
+    bytes prevTxHash = 1;
+    // Index of the output of the previous transaction we want to spend
+    uint32 prevOutIndex = 2;
+    bytes publicKey = 3;
+    bytes signature = 4;
 }
 
 message TxOutput {
-	int64 amount = 1;
-	bytes address = 2;
+    int64 amount = 1;
+    bytes address = 2;
 }
 
 message Transaction {
   int32 version = 1;
-  repeated TxInput inputes = 2;
+  repeated TxInput inputs = 2;  // Fixed typo: changed "inputes" to "inputs"
   repeated TxOutput outputs = 3;
 }

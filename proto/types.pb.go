@@ -21,6 +21,94 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Version struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	Height        int32                  `protobuf:"varint,2,opt,name=height,proto3" json:"height,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Version) Reset() {
+	*x = Version{}
+	mi := &file_proto_types_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Version) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Version) ProtoMessage() {}
+
+func (x *Version) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_types_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Version.ProtoReflect.Descriptor instead.
+func (*Version) Descriptor() ([]byte, []int) {
+	return file_proto_types_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Version) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *Version) GetHeight() int32 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+type Ack struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Ack) Reset() {
+	*x = Ack{}
+	mi := &file_proto_types_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Ack) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Ack) ProtoMessage() {}
+
+func (x *Ack) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_types_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Ack.ProtoReflect.Descriptor instead.
+func (*Ack) Descriptor() ([]byte, []int) {
+	return file_proto_types_proto_rawDescGZIP(), []int{1}
+}
+
 type Block struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Header        *Header                `protobuf:"bytes,1,opt,name=header,proto3" json:"header,omitempty"`
@@ -31,7 +119,7 @@ type Block struct {
 
 func (x *Block) Reset() {
 	*x = Block{}
-	mi := &file_proto_types_proto_msgTypes[0]
+	mi := &file_proto_types_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +131,7 @@ func (x *Block) String() string {
 func (*Block) ProtoMessage() {}
 
 func (x *Block) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[0]
+	mi := &file_proto_types_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +144,7 @@ func (x *Block) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Block.ProtoReflect.Descriptor instead.
 func (*Block) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{0}
+	return file_proto_types_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Block) GetHeader() *Header {
@@ -86,7 +174,7 @@ type Header struct {
 
 func (x *Header) Reset() {
 	*x = Header{}
-	mi := &file_proto_types_proto_msgTypes[1]
+	mi := &file_proto_types_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -98,7 +186,7 @@ func (x *Header) String() string {
 func (*Header) ProtoMessage() {}
 
 func (x *Header) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[1]
+	mi := &file_proto_types_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +199,7 @@ func (x *Header) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Header.ProtoReflect.Descriptor instead.
 func (*Header) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{1}
+	return file_proto_types_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Header) GetVersion() int32 {
@@ -151,9 +239,9 @@ func (x *Header) GetTimestamp() int64 {
 
 type TxInput struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// this  previous hash of the transaction containign the output we want to sepnd
+	// Previous hash of the transaction containing the output we want to spend
 	PrevTxHash []byte `protobuf:"bytes,1,opt,name=prevTxHash,proto3" json:"prevTxHash,omitempty"`
-	// This index of the output of the previous transacton we want to spen
+	// Index of the output of the previous transaction we want to spend
 	PrevOutIndex  uint32 `protobuf:"varint,2,opt,name=prevOutIndex,proto3" json:"prevOutIndex,omitempty"`
 	PublicKey     []byte `protobuf:"bytes,3,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
 	Signature     []byte `protobuf:"bytes,4,opt,name=signature,proto3" json:"signature,omitempty"`
@@ -163,7 +251,7 @@ type TxInput struct {
 
 func (x *TxInput) Reset() {
 	*x = TxInput{}
-	mi := &file_proto_types_proto_msgTypes[2]
+	mi := &file_proto_types_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -175,7 +263,7 @@ func (x *TxInput) String() string {
 func (*TxInput) ProtoMessage() {}
 
 func (x *TxInput) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[2]
+	mi := &file_proto_types_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -188,7 +276,7 @@ func (x *TxInput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TxInput.ProtoReflect.Descriptor instead.
 func (*TxInput) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{2}
+	return file_proto_types_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *TxInput) GetPrevTxHash() []byte {
@@ -229,7 +317,7 @@ type TxOutput struct {
 
 func (x *TxOutput) Reset() {
 	*x = TxOutput{}
-	mi := &file_proto_types_proto_msgTypes[3]
+	mi := &file_proto_types_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -241,7 +329,7 @@ func (x *TxOutput) String() string {
 func (*TxOutput) ProtoMessage() {}
 
 func (x *TxOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[3]
+	mi := &file_proto_types_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -254,7 +342,7 @@ func (x *TxOutput) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TxOutput.ProtoReflect.Descriptor instead.
 func (*TxOutput) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{3}
+	return file_proto_types_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TxOutput) GetAmount() int64 {
@@ -274,7 +362,7 @@ func (x *TxOutput) GetAddress() []byte {
 type Transaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Version       int32                  `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
-	Inputes       []*TxInput             `protobuf:"bytes,2,rep,name=inputes,proto3" json:"inputes,omitempty"`
+	Inputs        []*TxInput             `protobuf:"bytes,2,rep,name=inputs,proto3" json:"inputs,omitempty"` // Fixed typo: changed "inputes" to "inputs"
 	Outputs       []*TxOutput            `protobuf:"bytes,3,rep,name=outputs,proto3" json:"outputs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -282,7 +370,7 @@ type Transaction struct {
 
 func (x *Transaction) Reset() {
 	*x = Transaction{}
-	mi := &file_proto_types_proto_msgTypes[4]
+	mi := &file_proto_types_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -294,7 +382,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[4]
+	mi := &file_proto_types_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -307,7 +395,7 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{4}
+	return file_proto_types_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Transaction) GetVersion() int32 {
@@ -317,9 +405,9 @@ func (x *Transaction) GetVersion() int32 {
 	return 0
 }
 
-func (x *Transaction) GetInputes() []*TxInput {
+func (x *Transaction) GetInputs() []*TxInput {
 	if x != nil {
-		return x.Inputes
+		return x.Inputs
 	}
 	return nil
 }
@@ -335,7 +423,11 @@ var File_proto_types_proto protoreflect.FileDescriptor
 
 const file_proto_types_proto_rawDesc = "" +
 	"\n" +
-	"\x11proto/types.proto\x12\ablocker\"j\n" +
+	"\x11proto/types.proto\x12\ablocker\";\n" +
+	"\aVersion\x12\x18\n" +
+	"\aversion\x18\x01 \x01(\tR\aversion\x12\x16\n" +
+	"\x06height\x18\x02 \x01(\x05R\x06height\"\x05\n" +
+	"\x03Ack\"j\n" +
 	"\x05Block\x12'\n" +
 	"\x06header\x18\x01 \x01(\v2\x0f.blocker.HeaderR\x06header\x128\n" +
 	"\ftransactions\x18\x02 \x03(\v2\x14.blocker.TransactionR\ftransactions\"\x92\x01\n" +
@@ -354,11 +446,14 @@ const file_proto_types_proto_rawDesc = "" +
 	"\tsignature\x18\x04 \x01(\fR\tsignature\"<\n" +
 	"\bTxOutput\x12\x16\n" +
 	"\x06amount\x18\x01 \x01(\x03R\x06amount\x12\x18\n" +
-	"\aaddress\x18\x02 \x01(\fR\aaddress\"\x80\x01\n" +
+	"\aaddress\x18\x02 \x01(\fR\aaddress\"~\n" +
 	"\vTransaction\x12\x18\n" +
-	"\aversion\x18\x01 \x01(\x05R\aversion\x12*\n" +
-	"\ainputes\x18\x02 \x03(\v2\x10.blocker.TxInputR\ainputes\x12+\n" +
-	"\aoutputs\x18\x03 \x03(\v2\x11.blocker.TxOutputR\aoutputsB#Z!github.com/everestp/blocker;protob\x06proto3"
+	"\aversion\x18\x01 \x01(\x05R\aversion\x12(\n" +
+	"\x06inputs\x18\x02 \x03(\v2\x10.blocker.TxInputR\x06inputs\x12+\n" +
+	"\aoutputs\x18\x03 \x03(\v2\x11.blocker.TxOutputR\aoutputs2p\n" +
+	"\x04Node\x12/\n" +
+	"\tHandshake\x12\x10.blocker.Version\x1a\x10.blocker.Version\x127\n" +
+	"\x11HandleTransaction\x12\x14.blocker.Transaction\x1a\f.blocker.AckB#Z!github.com/everestp/blocker;protob\x06proto3"
 
 var (
 	file_proto_types_proto_rawDescOnce sync.Once
@@ -372,21 +467,27 @@ func file_proto_types_proto_rawDescGZIP() []byte {
 	return file_proto_types_proto_rawDescData
 }
 
-var file_proto_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_proto_types_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_proto_types_proto_goTypes = []any{
-	(*Block)(nil),       // 0: blocker.Block
-	(*Header)(nil),      // 1: blocker.Header
-	(*TxInput)(nil),     // 2: blocker.TxInput
-	(*TxOutput)(nil),    // 3: blocker.TxOutput
-	(*Transaction)(nil), // 4: blocker.Transaction
+	(*Version)(nil),     // 0: blocker.Version
+	(*Ack)(nil),         // 1: blocker.Ack
+	(*Block)(nil),       // 2: blocker.Block
+	(*Header)(nil),      // 3: blocker.Header
+	(*TxInput)(nil),     // 4: blocker.TxInput
+	(*TxOutput)(nil),    // 5: blocker.TxOutput
+	(*Transaction)(nil), // 6: blocker.Transaction
 }
 var file_proto_types_proto_depIdxs = []int32{
-	1, // 0: blocker.Block.header:type_name -> blocker.Header
-	4, // 1: blocker.Block.transactions:type_name -> blocker.Transaction
-	2, // 2: blocker.Transaction.inputes:type_name -> blocker.TxInput
-	3, // 3: blocker.Transaction.outputs:type_name -> blocker.TxOutput
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
+	3, // 0: blocker.Block.header:type_name -> blocker.Header
+	6, // 1: blocker.Block.transactions:type_name -> blocker.Transaction
+	4, // 2: blocker.Transaction.inputs:type_name -> blocker.TxInput
+	5, // 3: blocker.Transaction.outputs:type_name -> blocker.TxOutput
+	0, // 4: blocker.Node.Handshake:input_type -> blocker.Version
+	6, // 5: blocker.Node.HandleTransaction:input_type -> blocker.Transaction
+	0, // 6: blocker.Node.Handshake:output_type -> blocker.Version
+	1, // 7: blocker.Node.HandleTransaction:output_type -> blocker.Ack
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -403,9 +504,9 @@ func file_proto_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_types_proto_rawDesc), len(file_proto_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_proto_types_proto_goTypes,
 		DependencyIndexes: file_proto_types_proto_depIdxs,

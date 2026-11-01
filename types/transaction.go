@@ -16,7 +16,7 @@ func HashTransaction(tx *proto.Transaction) []byte {
 	// Clone the transaction and clear all input signatures so hashing
 	// is consistent and doesn't mutate the original transaction.
 	txCopy := pb.Clone(tx).(*proto.Transaction)
-	for _, input := range txCopy.Inputes {
+	for _, input := range txCopy.Inputs {
 		input.Signature = nil
 	}
 
@@ -32,7 +32,7 @@ func VerifyTransaction(tx *proto.Transaction) bool {
 	// Compute the hash of the transaction without any signatures
 	txHash := HashTransaction(tx)
 
-	for _, input := range tx.Inputes {
+	for _, input := range tx.Inputs {
 		if len(input.Signature) == 0 {
 			return false
 		}
