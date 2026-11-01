@@ -149,17 +149,140 @@ func (x *Header) GetTimestamp() int64 {
 	return 0
 }
 
+type TxInput struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// this  previous hash of the transaction containign the output we want to sepnd
+	PrevTxHash []byte `protobuf:"bytes,1,opt,name=prevTxHash,proto3" json:"prevTxHash,omitempty"`
+	// This index of the output of the previous transacton we want to spen
+	PrevOutIndex  uint32 `protobuf:"varint,2,opt,name=prevOutIndex,proto3" json:"prevOutIndex,omitempty"`
+	PublicKey     []byte `protobuf:"bytes,3,opt,name=publicKey,proto3" json:"publicKey,omitempty"`
+	Signature     []byte `protobuf:"bytes,4,opt,name=signature,proto3" json:"signature,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TxInput) Reset() {
+	*x = TxInput{}
+	mi := &file_proto_types_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TxInput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TxInput) ProtoMessage() {}
+
+func (x *TxInput) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_types_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TxInput.ProtoReflect.Descriptor instead.
+func (*TxInput) Descriptor() ([]byte, []int) {
+	return file_proto_types_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *TxInput) GetPrevTxHash() []byte {
+	if x != nil {
+		return x.PrevTxHash
+	}
+	return nil
+}
+
+func (x *TxInput) GetPrevOutIndex() uint32 {
+	if x != nil {
+		return x.PrevOutIndex
+	}
+	return 0
+}
+
+func (x *TxInput) GetPublicKey() []byte {
+	if x != nil {
+		return x.PublicKey
+	}
+	return nil
+}
+
+func (x *TxInput) GetSignature() []byte {
+	if x != nil {
+		return x.Signature
+	}
+	return nil
+}
+
+type TxOutput struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Amount        int64                  `protobuf:"varint,1,opt,name=amount,proto3" json:"amount,omitempty"`
+	Address       []byte                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TxOutput) Reset() {
+	*x = TxOutput{}
+	mi := &file_proto_types_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TxOutput) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TxOutput) ProtoMessage() {}
+
+func (x *TxOutput) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_types_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TxOutput.ProtoReflect.Descriptor instead.
+func (*TxOutput) Descriptor() ([]byte, []int) {
+	return file_proto_types_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TxOutput) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *TxOutput) GetAddress() []byte {
+	if x != nil {
+		return x.Address
+	}
+	return nil
+}
+
 type Transaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Hash          []byte                 `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-	Data          []byte                 `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Version       int32                  `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
+	Inputes       []*TxInput             `protobuf:"bytes,2,rep,name=inputes,proto3" json:"inputes,omitempty"`
+	Outputs       []*TxOutput            `protobuf:"bytes,3,rep,name=outputs,proto3" json:"outputs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
 	*x = Transaction{}
-	mi := &file_proto_types_proto_msgTypes[2]
+	mi := &file_proto_types_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -171,7 +294,7 @@ func (x *Transaction) String() string {
 func (*Transaction) ProtoMessage() {}
 
 func (x *Transaction) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_types_proto_msgTypes[2]
+	mi := &file_proto_types_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,19 +307,26 @@ func (x *Transaction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Transaction.ProtoReflect.Descriptor instead.
 func (*Transaction) Descriptor() ([]byte, []int) {
-	return file_proto_types_proto_rawDescGZIP(), []int{2}
+	return file_proto_types_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *Transaction) GetHash() []byte {
+func (x *Transaction) GetVersion() int32 {
 	if x != nil {
-		return x.Hash
+		return x.Version
+	}
+	return 0
+}
+
+func (x *Transaction) GetInputes() []*TxInput {
+	if x != nil {
+		return x.Inputes
 	}
 	return nil
 }
 
-func (x *Transaction) GetData() []byte {
+func (x *Transaction) GetOutputs() []*TxOutput {
 	if x != nil {
-		return x.Data
+		return x.Outputs
 	}
 	return nil
 }
@@ -214,10 +344,21 @@ const file_proto_types_proto_rawDesc = "" +
 	"\x06height\x18\x02 \x01(\x03R\x06height\x12\x1b\n" +
 	"\tprev_hash\x18\x03 \x01(\fR\bprevHash\x12\x1b\n" +
 	"\troot_hash\x18\x04 \x01(\fR\brootHash\x12\x1c\n" +
-	"\ttimestamp\x18\x05 \x01(\x03R\ttimestamp\"5\n" +
-	"\vTransaction\x12\x12\n" +
-	"\x04hash\x18\x01 \x01(\fR\x04hash\x12\x12\n" +
-	"\x04data\x18\x02 \x01(\fR\x04dataB%Z#github.com/everestp/blocker;blockerb\x06proto3"
+	"\ttimestamp\x18\x05 \x01(\x03R\ttimestamp\"\x89\x01\n" +
+	"\aTxInput\x12\x1e\n" +
+	"\n" +
+	"prevTxHash\x18\x01 \x01(\fR\n" +
+	"prevTxHash\x12\"\n" +
+	"\fprevOutIndex\x18\x02 \x01(\rR\fprevOutIndex\x12\x1c\n" +
+	"\tpublicKey\x18\x03 \x01(\fR\tpublicKey\x12\x1c\n" +
+	"\tsignature\x18\x04 \x01(\fR\tsignature\"<\n" +
+	"\bTxOutput\x12\x16\n" +
+	"\x06amount\x18\x01 \x01(\x03R\x06amount\x12\x18\n" +
+	"\aaddress\x18\x02 \x01(\fR\aaddress\"\x80\x01\n" +
+	"\vTransaction\x12\x18\n" +
+	"\aversion\x18\x01 \x01(\x05R\aversion\x12*\n" +
+	"\ainputes\x18\x02 \x03(\v2\x10.blocker.TxInputR\ainputes\x12+\n" +
+	"\aoutputs\x18\x03 \x03(\v2\x11.blocker.TxOutputR\aoutputsB#Z!github.com/everestp/blocker;protob\x06proto3"
 
 var (
 	file_proto_types_proto_rawDescOnce sync.Once
@@ -231,20 +372,24 @@ func file_proto_types_proto_rawDescGZIP() []byte {
 	return file_proto_types_proto_rawDescData
 }
 
-var file_proto_types_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_proto_types_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_types_proto_goTypes = []any{
 	(*Block)(nil),       // 0: blocker.Block
 	(*Header)(nil),      // 1: blocker.Header
-	(*Transaction)(nil), // 2: blocker.Transaction
+	(*TxInput)(nil),     // 2: blocker.TxInput
+	(*TxOutput)(nil),    // 3: blocker.TxOutput
+	(*Transaction)(nil), // 4: blocker.Transaction
 }
 var file_proto_types_proto_depIdxs = []int32{
 	1, // 0: blocker.Block.header:type_name -> blocker.Header
-	2, // 1: blocker.Block.transactions:type_name -> blocker.Transaction
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 1: blocker.Block.transactions:type_name -> blocker.Transaction
+	2, // 2: blocker.Transaction.inputes:type_name -> blocker.TxInput
+	3, // 3: blocker.Transaction.outputs:type_name -> blocker.TxOutput
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_types_proto_init() }
@@ -258,7 +403,7 @@ func file_proto_types_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_types_proto_rawDesc), len(file_proto_types_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
